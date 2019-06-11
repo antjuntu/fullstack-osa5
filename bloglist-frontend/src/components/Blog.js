@@ -12,9 +12,9 @@ const Blog = ({ blog, handleLikesUpdate, handleBlogRemove, loggedUser }) => {
     marginBottom: 5
   }
 
-  const detailsStyle = { display: showDetails ? '' : 'none'}
+  const detailsStyle = { display: showDetails ? '' : 'none' }
 
-  const removeButtonStyle= { display: loggedUser.username === blog.user.username ? '' : 'none'}
+  const removeButtonStyle= { display: loggedUser.username === blog.user.username ? '' : 'none' }
 
   return (
     <div style={blogStyle}>
@@ -35,8 +35,8 @@ const Blog = ({ blog, handleLikesUpdate, handleBlogRemove, loggedUser }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  handleLikesUpdate: PropTypes.func.isRequired, 
-  handleBlogRemove: PropTypes.func.isRequired, 
+  handleLikesUpdate: PropTypes.func.isRequired,
+  handleBlogRemove: PropTypes.func.isRequired,
   loggedUser: PropTypes.object.isRequired
 }
 

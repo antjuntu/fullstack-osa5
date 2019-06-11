@@ -22,7 +22,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username, 
+        username,
         password
       })
 
@@ -54,7 +54,7 @@ const App = () => {
       setType('error')
       setTimeout(() => {
         setMessage(null)
-      }, 5000);
+      }, 5000)
     }
   }
 
@@ -127,7 +127,7 @@ const App = () => {
       <Notification message={message} type={type} />
       <p>{user.name} logged in</p>
       <button onClick={logout}>logout</button>
-      
+
       <Togglable buttonLabel="create new" ref={blogFormRef}>
         <BlogForm blogs={blogs} setBlogs={setBlogs} setMessage={setMessage} setType={setType} hideForm={() => blogFormRef.current.toggleVisibility()} />
       </Togglable>

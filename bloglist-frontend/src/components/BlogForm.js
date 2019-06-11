@@ -26,7 +26,7 @@ const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
     setType('success')
     setTimeout(() => {
       setMessage(null)
-    }, 5000);
+    }, 5000)
   }
 
   return (
