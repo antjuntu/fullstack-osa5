@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -15,6 +16,8 @@ const App = () => {
   const [type, setType] = useState('success')
 
   const loggedUserKey = 'loggedBlogAppUser'
+
+  const blogFormRef = React.createRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -96,9 +99,12 @@ const App = () => {
       <Notification message={message} type={type} />
       <p>{user.name} logged in</p>
       <button onClick={logout}>logout</button>
-      <h2>create new</h2>
-      <BlogForm blogs={blogs} setBlogs={setBlogs} setMessage={setMessage} setType={setType} />
+      
+      <Togglable buttonLabel="create new" ref={blogFormRef}>
+        <BlogForm blogs={blogs} setBlogs={setBlogs} setMessage={setMessage} setType={setType} hideForm={() => blogFormRef.current.toggleVisibility()} />
+      </Togglable>
       <br />
+
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
