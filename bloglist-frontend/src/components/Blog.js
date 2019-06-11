@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const Blog = ({ blog, blogAdder, handleLikesUpdate, handleBlogRemove }) => {
+const Blog = ({ blog, handleLikesUpdate, handleBlogRemove, loggedUser }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const blogStyle = {
@@ -12,6 +12,8 @@ const Blog = ({ blog, blogAdder, handleLikesUpdate, handleBlogRemove }) => {
 
   const detailsStyle = { display: showDetails ? '' : 'none'}
 
+  const removeButtonStyle= { display: loggedUser.username === blog.user.username ? '' : 'none'}
+
   return (
     <div style={blogStyle}>
       <div onClick={() => setShowDetails(!showDetails)}>
@@ -21,7 +23,7 @@ const Blog = ({ blog, blogAdder, handleLikesUpdate, handleBlogRemove }) => {
         <div><a href={blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a></div>
         <div>{blog.likes} likes &nbsp;<button onClick={handleLikesUpdate}>like</button></div>
         <div>added by {blog.user.name}</div>
-        <div>
+        <div style={removeButtonStyle}>
           <button onClick={handleBlogRemove}>remove</button>
         </div>
       </div>
