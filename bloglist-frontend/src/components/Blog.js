@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-const Blog = ({ blog, handleLikesUpdate }) => {
+const Blog = ({ blog, blogAdder, handleLikesUpdate, handleBlogRemove }) => {
   const [showDetails, setShowDetails] = useState(false)
 
   const blogStyle = {
@@ -21,6 +21,9 @@ const Blog = ({ blog, handleLikesUpdate }) => {
         <div><a href={blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a></div>
         <div>{blog.likes} likes &nbsp;<button onClick={handleLikesUpdate}>like</button></div>
         <div>added by {blog.user.name}</div>
+        <div>
+          <button onClick={handleBlogRemove}>remove</button>
+        </div>
       </div>
     </div>
   )
