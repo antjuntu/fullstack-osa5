@@ -7,7 +7,7 @@ const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
   const [url, setUrl] = useState('')
 
   const addBlog = async (event) => {
-    event.preventDefault()
+    //event.preventDefault()
     hideForm()
     const blogObject = {
       title,
