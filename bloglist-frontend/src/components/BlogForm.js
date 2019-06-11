@@ -15,7 +15,9 @@ const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
       url
     }
 
-    const addedBlog = await blogService.create(blogObject)
+    let addedBlog = await blogService.create(blogObject)
+    // We need populated user object
+    addedBlog = await blogService.get(addedBlog.id)
     setBlogs(blogs.concat(addedBlog))
     setTitle('')
     setAuthor('')
