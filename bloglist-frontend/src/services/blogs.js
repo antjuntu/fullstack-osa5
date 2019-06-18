@@ -11,7 +11,7 @@ const getAll = () => {
   const request = axios.get(baseUrl)
   return request.then(response => {
     //console.log(response.data)
-    return response.data 
+    return response.data
   })
 }
 
@@ -44,10 +44,10 @@ const deleteBlog = async id => {
 }
 
 export default {
-  getAll, 
+  getAll,
   get,
-  create, 
+  create,
   setToken,
   update,
-  deleteBlog 
+  deleteBlog
 }
