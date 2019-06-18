@@ -18,10 +18,10 @@ const Blog = ({ blog, handleLikesUpdate, handleBlogRemove, loggedUser }) => {
 
   return (
     <div style={blogStyle}>
-      <div onClick={() => setShowDetails(!showDetails)}>
+      <div onClick={() => setShowDetails(!showDetails)} className="titleRow">
         {blog.title} {blog.author}
       </div>
-      <div style={detailsStyle}>
+      <div style={detailsStyle} className="details">
         <div><a href={blog.url} target="_blank" rel="noopener noreferrer">{blog.url}</a></div>
         <div>{blog.likes} likes &nbsp;<button onClick={handleLikesUpdate}>like</button></div>
         <div>added by {blog.user.name}</div>
