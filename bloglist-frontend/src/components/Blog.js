@@ -17,7 +17,7 @@ const Blog = ({ blog, handleLikesUpdate, handleBlogRemove, loggedUser }) => {
   const removeButtonStyle= { display: loggedUser.username === blog.user.username ? '' : 'none' }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog">
       <div onClick={() => setShowDetails(!showDetails)} className="titleRow">
         {blog.title} {blog.author}
       </div>
