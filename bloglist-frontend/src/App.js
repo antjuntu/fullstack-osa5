@@ -96,7 +96,7 @@ const App = () => {
       <div>
         <h2>log in to application</h2>
         <Notification message={message} type={type} />
-        <form onSubmit={login}>
+        <form onSubmit={login} className="loginForm">
           <div>
             username
             <input
