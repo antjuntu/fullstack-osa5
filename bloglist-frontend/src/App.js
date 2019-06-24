@@ -6,11 +6,12 @@ import Togglable from './components/Togglable'
 
 import blogService from './services/blogs'
 import loginService from './services/login'
+import { useField } from './hooks'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  //const [username, setUsername] = useState('')
+  //const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [type, setType] = useState('success')
@@ -18,6 +19,9 @@ const App = () => {
   const loggedUserKey = 'loggedBlogAppUser'
 
   const blogFormRef = React.createRef()
+
+  const username = useField('text')
+  const password = useField('password')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -38,8 +42,8 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username,
-        password
+        username: username.value,
+        password: password.value
       })
 
       window.localStorage.setItem(
@@ -47,8 +51,8 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      //setUsername('')
+      //setPassword('')
     } catch (exception) {
       setMessage('wrong username or password')
       setType('error')
@@ -99,21 +103,11 @@ const App = () => {
         <form onSubmit={login} className="loginForm">
           <div>
             username
-            <input
-              type="text"
-              value={username}
-              name="Username"
-              onChange={(event) => setUsername(event.target.value)}
-            />
+            <input {...username} />
           </div>
           <div>
             password
-            <input
-              type="password"
-              value={password}
-              name="Password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
+            <input {...password} />
           </div>
           <button type="submit">log in</button>
         </form>
