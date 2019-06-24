@@ -1,27 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import blogService from '../services/blogs'
+import { useField } from '../hooks'
 
 const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+  const title = useField('text')
+  const author = useField('text')
+  const url = useField('text')
 
   const addBlog = async (event) => {
     event.preventDefault()
     hideForm()
     const blogObject = {
-      title,
-      author,
-      url
+      title: title.value,
+      author: author.value,
+      url: url.value
     }
 
     let addedBlog = await blogService.create(blogObject)
     // We need populated user object
     addedBlog = await blogService.get(addedBlog.id)
     setBlogs(blogs.concat(addedBlog))
-    setTitle('')
-    setAuthor('')
-    setUrl('')
+    title.reset()
+    author.reset()
+    url.reset()
     setMessage(`a new blog ${addedBlog.title} by ${addedBlog.author} added`)
     setType('success')
     setTimeout(() => {
@@ -35,30 +36,15 @@ const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
       <form onSubmit={addBlog}>
         <div>
           title
-          <input
-            type="text"
-            value={title}
-            name="Title"
-            onChange={({ target }) => setTitle(target.value)}
-          />
+          <input {...title} />
         </div>
         <div>
           author
-          <input
-            type="text"
-            value={author}
-            name="Author"
-            onChange={({ target }) => setAuthor(target.value)}
-          />
+          <input {...author} />
         </div>
         <div>
           url
-          <input
-            type="text"
-            value={url}
-            name="Url"
-            onChange={({ target }) => setUrl(target.value)}
-          />
+          <input {...url} />
         </div>
         <button type="submit">create</button>
       </form>
