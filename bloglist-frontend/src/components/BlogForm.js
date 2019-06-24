@@ -3,9 +3,9 @@ import blogService from '../services/blogs'
 import { useField } from '../hooks'
 
 const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
-  const title = useField('text')
-  const author = useField('text')
-  const url = useField('text')
+  const { reset: resetTitle, ...title } = useField('text')
+  const { reset: resetAuthor, ...author } = useField('author')
+  const { reset: resetUrl, ...url } = useField('text')
 
   const addBlog = async (event) => {
     event.preventDefault()
@@ -20,9 +20,9 @@ const BlogForm = ({ blogs, setBlogs, setMessage, setType, hideForm }) => {
     // We need populated user object
     addedBlog = await blogService.get(addedBlog.id)
     setBlogs(blogs.concat(addedBlog))
-    title.reset()
-    author.reset()
-    url.reset()
+    resetTitle()
+    resetAuthor()
+    resetUrl()
     setMessage(`a new blog ${addedBlog.title} by ${addedBlog.author} added`)
     setType('success')
     setTimeout(() => {

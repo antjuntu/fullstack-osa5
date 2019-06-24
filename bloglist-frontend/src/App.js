@@ -10,8 +10,6 @@ import { useField } from './hooks'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  //const [username, setUsername] = useState('')
-  //const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
   const [type, setType] = useState('success')
@@ -20,9 +18,11 @@ const App = () => {
 
   const blogFormRef = React.createRef()
 
-  const username = useField('text')
-  const password = useField('password')
+  const { reset: resetUsername, ...username } = useField('text')
+  const { reset: resetPassword, ...password } = useField('password')
 
+  //console.log(username)
+  //console.log(password)
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
@@ -51,8 +51,8 @@ const App = () => {
       )
       blogService.setToken(user.token)
       setUser(user)
-      username.reset()
-      password.reset()
+      resetUsername()
+      resetPassword()
     } catch (exception) {
       setMessage('wrong username or password')
       setType('error')
